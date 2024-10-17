@@ -19,6 +19,10 @@
   height: 100%;
 }
 
+.d-flex {
+  width: 25%;
+}
+
 .main-color {
 background-color: #290d8e ;
 }
