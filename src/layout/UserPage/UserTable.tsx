@@ -20,6 +20,7 @@ export const UserTable = () => {
     }
 
     const fetchUsers = async () => {
+      setIsLoading(false);
       let getUserUrl: string = "";
 
       if(keyword !== ''){
@@ -50,7 +51,6 @@ export const UserTable = () => {
         userModels.push(user);
       }
       setUsers(userModels);
-      setIsLoading(false);
     }
 
     fetchUsers().catch((error: any) => {
