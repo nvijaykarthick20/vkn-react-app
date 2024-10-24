@@ -7,7 +7,7 @@ export const UserTable = () => {
 
   const [users, setUsers] = useState<UserModel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [httpErrors, setHttpErrors] = useState();
+  const [httpError, setHttpError] = useState();
   const [search, setSearch] = useState('');
   const [keyword, setKeyword] = useState('');
 
@@ -23,9 +23,9 @@ export const UserTable = () => {
       setIsLoading(false);
       let getUserUrl: string = "";
 
-      if(keyword !== ''){
+      if (keyword !== '') {
         getUserUrl = `vknevent/v1/user?keyword=${keyword}`;
-      }else{
+      } else {
         getUserUrl = `vknevent/v1/user`;
       }
 
@@ -55,13 +55,21 @@ export const UserTable = () => {
 
     fetchUsers().catch((error: any) => {
       setIsLoading(false);
-      setHttpErrors(error.message);
+      setHttpError(error.message);
     })
 
   }, [search])
 
   const searchHandleChange = () => {
     setSearch(keyword);
+  }
+
+  if (httpError) {
+    return (
+      <div className='container m-5'>
+        <p>{httpError}</p>
+      </div>
+    )
   }
 
   return (
@@ -72,7 +80,7 @@ export const UserTable = () => {
           onChange={e => setKeyword(e.target.value)}
         />
         <button className='btn btn-outline-success'
-        onClick={() => searchHandleChange()}
+          onClick={() => searchHandleChange()}
         >
           Search
         </button>

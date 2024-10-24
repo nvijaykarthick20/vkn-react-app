@@ -5,9 +5,9 @@ import EventTransactionModel from "../../models/EventTransactionModel";
 
 export const EventTransaction = () => {
 
-const [eventTransactions, setEventTransactions] = useState<EventTransactionModel[]>([]);
+  const [eventTransactions, setEventTransactions] = useState<EventTransactionModel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [httpErrors, setHttpErrors] = useState();
+  const [httpError, setHttpError] = useState();
   const [search, setSearch] = useState('');
 
   const eventTransactionModel: EventTransactionModel[] = [];
@@ -48,10 +48,19 @@ const [eventTransactions, setEventTransactions] = useState<EventTransactionModel
 
     fetchUsers().catch((error: any) => {
       setIsLoading(false);
-      setHttpErrors(error.message);
+      setHttpError(error.message);
     })
 
   }, [])
+
+  if (httpError) {
+    return (
+      <div className='container m-5'>
+        <p>{httpError}</p>
+      </div>
+    )
+  }
+
 
   return (
     <div>
