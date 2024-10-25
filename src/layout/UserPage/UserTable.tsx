@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import UserModel from "../../models/UserModel";
 import { error } from "console";
 import { SpinnerLoading } from "../common/SpinnerLoading";
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 export const UserTable = () => {
 
@@ -73,47 +75,17 @@ export const UserTable = () => {
   }
 
   return (
-    <div>
-      <div className='d-flex'>
-        <input id="user-search-id" className='form-control me-2' type='search'
-          placeholder='Search' aria-labelledby='Search'
-          onChange={e => setKeyword(e.target.value)}
-        />
-        <button className='btn btn-outline-success'
-          onClick={() => searchHandleChange()}
-        >
-          Search
-        </button>
-      </div>
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th scope='col'>User Name</th>
-            <th scope='col'>Role</th>
-            <th scope='col'>First Name</th>
-            <th scope='col'>Last Name</th>
-            <th scope='col'>Gender</th>
-            <th scope='col'>Email</th>
-            <th scope='col'>Date of birth</th>
-            <th scope='col'>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, i) => (
-            <tr key={i}>
-              <td>{user.userName}</td>
-              <td>{user.role}</td>
-              <td>{user.firstName}</td>
-              <td>{user.lastName}</td>
-              <td>{user.gender}</td>
-              <td>{user.email}</td>
-              <td>{user.dob}</td>
-              <td>{user.address}</td>
-            </tr>
-          )
-          )}
-        </tbody>
-      </table>
+    <div className="User">
+      <DataTable value={users} tableStyle={{ minWidth: '50rem' }}>
+        <Column field="userName" header="User Name"></Column>
+        <Column field="firstName" header="First Name"></Column>
+        <Column field="lastName" header="Last Name"></Column>
+        <Column field="role" header="Role"></Column>
+        <Column field="gender" header="Gender"></Column>
+        <Column field="email" header="Email"></Column>
+        <Column field="dob" header="DOB"></Column>
+        <Column field="address" header="Address"></Column>
+      </DataTable>
     </div>
   );
 }

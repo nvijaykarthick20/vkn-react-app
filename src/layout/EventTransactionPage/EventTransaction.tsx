@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import UserModel from "../../models/UserModel";
 import { SpinnerLoading } from "../common/SpinnerLoading";
 import EventTransactionModel from "../../models/EventTransactionModel";
-
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 export const EventTransaction = () => {
 
   const [eventTransactions, setEventTransactions] = useState<EventTransactionModel[]>([]);
@@ -63,36 +64,16 @@ export const EventTransaction = () => {
 
 
   return (
-    <div>
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th scope='col'>Event Id</th>
-            <th scope='col'>Topic</th>
-            <th scope='col'>Partition</th>
-            <th scope='col'>Status</th>
-            <th scope='col'>Event Date</th>
-            <th scope='col'>Request body</th>
-            <th scope='col'>Exception Message</th>
-            <th scope='col'>Stack Trace</th>
-          </tr>
-        </thead>
-        <tbody>
-          {eventTransactions.map((trans, i) => (
-            <tr key={i}>
-              <td>{trans.eventId}</td>
-              <td>{trans.topic}</td>
-              <td>{trans.partition}</td>
-              <td>{trans.status}</td>
-              <td>{trans.eventDate}</td>
-              <td>{trans.requestBody}</td>
-              <td>{trans.exceptionMsg}</td>
-              <td>{trans.stackTrace}</td>
-            </tr>
-          )
-          )}
-        </tbody>
-      </table>
+    <div className="User">
+      <DataTable value={eventTransactions} tableStyle={{ minWidth: '50rem' }}>
+        <Column field="eventId" header="Event Id"></Column>
+        <Column field="partition" header="Partition"></Column>
+        <Column field="requestBody" header="Request Body"></Column>
+        <Column field="topic" header="Topic"></Column>
+        <Column field="status" header="Status"></Column>
+        <Column field="eventDate" header="Event Date"></Column>
+        <Column field="exceptionMsg" header="Exception Message"></Column>
+      </DataTable>
     </div>
   );
 }
